@@ -2,7 +2,7 @@
 
 ## this ansible playbook is assumming that:
 1. you have setup ssh logins to the hosts in the host file
-2. is assumming that the servers listed in the host file are running debian based systems, if not apt commands will not work.
+2. the servers listed in the host file are running debian based systems, if not apt commands will not work.
 
 ## I included a Dockerfile that will:
 1. install openssh, curl and ansible binaries
