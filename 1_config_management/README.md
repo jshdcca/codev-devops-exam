@@ -16,8 +16,8 @@ docker build -t ubuntu-ansible .
 docker run -it -v .:/opt -p 80:80 ubuntu-ansible
 ```
 5. to run the playbook
-    a. cd into /opt
-    b. run
+    1. cd into `/opt`
+    2. run
     ```
     ansible-playbook -i hosts setup-nginx.yml
     ```
