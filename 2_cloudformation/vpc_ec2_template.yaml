@@ -5,7 +5,7 @@ Parameters:
   AMIId:
     Description: AMI ID 
     Type: String
-    Default: 'ami-02346a771f34de8ac'
+    Default: 'ami-061e2848f084ca460'
 
 Resources:
   VPC:
@@ -102,7 +102,7 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t4g.micro
+      InstanceType: t2.micro
       ImageId: !Ref AMIId
       SubnetId: !Ref Subnet
       SecurityGroupIds:
