@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # get current day
-day_of_month=$(date +%d)
+day_of_month=$(date +%-d)
 
 # check day is odd
 if [ $((day_of_month % 2)) -ne 0 ]; then
