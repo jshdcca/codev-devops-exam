@@ -1,0 +1,67 @@
+---
+- name: ensure nginx is installed plus configured
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: installing nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: starting nginx
+      command: service nginx start
+
+    - name: vhost deployment
+      copy:
+        dest: /etc/nginx/sites-available/helloworld.com
+        content: |
+          server {
+              listen 80;
+              server_name helloworld.com www.helloworld.com;
+
+              root /var/www/helloworld.com;
+              index index.html;
+
+              location / {
+                  try_files $uri $uri/ =404;
+              }
+          }
+
+    - name: enabling vhost
+      file:
+        src: /etc/nginx/sites-available/helloworld.com
+        dest: /etc/nginx/sites-enabled/helloworld.com
+        state: link
+
+    - name: purge default nginx config
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: deploying website directory
+      file:
+        path: /var/www/helloworld.com
+        state: directory
+        mode: '0755'
+
+    - name: creating hello world
+      copy:
+        dest: /var/www/helloworld.com/index.html
+        content: |
+          <html>
+          <head>
+              <title>hello world</title>
+          </head>
+          <body>
+              <h1>Success! It works</h1>
+          </body>
+          </html>
+        mode: '0644'
+
+    - name: test nginx
+      command: nginx -t
+
+    - name: restart nginx
+      command: service nginx restart
