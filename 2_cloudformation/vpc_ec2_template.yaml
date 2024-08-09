@@ -5,7 +5,7 @@ Parameters:
   AMIId:
     Description: AMI ID 
     Type: String
-    Default: 'ami-061e2848f084ca460'
+    Default: 'ami-02346a771f34de8ac'
 
 Resources:
   VPC:
